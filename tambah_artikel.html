@@ -57,24 +57,22 @@
 
             <form id="form-tambah-artikel" method="POST">
                 <div class="mb-3">
-                    <label for="judul" class="form-label">Judul Artikel</label>
+                    <label for="title" class="form-label">Judul Artikel</label>
                     <input type="text" class="form-control" id="title" required>
                 </div>
                 <div class="mb-3">
-                    <label for="penulis" class="form-label">Nama Penulis</label>
+                    <label for="author" class="form-label">Nama Penulis</label>
                     <input type="text" class="form-control" id="author" required>
                 </div>
                 <div class="mb-3">
-                    <label for="gambar" class="form-label">URL Gambar</label>
-                    <input type="text" class="form-control" id="image"
-                        placeholder="Contoh: http://example.com/image.jpg" required>
+                    <label for="image" class="form-label">URL Gambar</label>
+                    <input type="text" class="form-control" id="image" placeholder="Contoh: http://example.com/image.jpg" required>
                     <div class="form-text">
-                        Anda bisa mengunggah gambar ke situs seperti <a href="https://postimages.org/"
-                            target="_blank">PostImages</a> lalu salin link-nya ke sini.
+                        Anda bisa mengunggah gambar ke situs seperti <a href="https://postimages.org/" target="_blank">PostImages</a> lalu salin link-nya ke sini.
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="kategori" class="form-label">Kategori</label>
+                    <label for="category" class="form-label">Kategori</label>
                     <select class="form-select" id="category">
                         <option value="Teknologi">Teknologi</option>
                         <option value="Pemerintahan">Pemerintahan</option>
@@ -85,7 +83,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="konten" class="form-label">Isi Artikel</label>
+                    <label for="content" class="form-label">Isi Artikel</label>
                     <textarea class="form-control" id="content" rows="8" required></textarea>
                 </div>
                 <div id="success-message" class="alert alert-success d-none" role="alert"></div>
@@ -98,9 +96,10 @@
     <script>
         const form = document.getElementById('form-tambah-artikel');
         const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
         const submitButton = form.querySelector('button[type="submit"]');
 
-        // Cek apakah pengguna sudah login, jika tidak, arahkan ke halaman login
+        // Cek apakah pengguna sudah login
         const token = localStorage.getItem('authToken');
         if (!token) {
             alert('Anda harus login untuk membuat artikel.');
@@ -109,14 +108,15 @@
 
         form.addEventListener('submit', async function (event) {
             event.preventDefault();
-            // ... (logika disable tombol)
+            submitButton.disabled = true;
+            submitButton.textContent = 'Memproses...';
 
             const articleData = {
-                title: document.getElementById('judul').value,
-                author: document.getElementById('penulis').value, // Atau bisa diambil dari data login
-                image: document.getElementById('gambar').value,
-                category: document.getElementById('kategori').value,
-                content: document.getElementById('konten').value
+                title: document.getElementById('title').value,
+                author: document.getElementById('author').value,
+                image: document.getElementById('image').value,
+                category: document.getElementById('category').value,
+                content: document.getElementById('content').value
             };
 
             try {
@@ -124,14 +124,12 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // --- INI BAGIAN PENTINGNYA ---
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify(articleData),
+                    body: JSON.stringify(articleData)
                 });
 
                 if (!response.ok) {
-                    // Jika token tidak valid/kadaluwarsa, server akan merespons 401
                     if (response.status === 401) {
                         alert('Sesi Anda telah berakhir. Silakan login kembali.');
                         window.location.href = 'Login dan Sign in.html';
@@ -140,9 +138,9 @@
                     throw new Error('Gagal mempublikasikan artikel.');
                 }
 
-                // ... (logika pesan sukses dan redirect)
                 successMessage.textContent = 'Artikel berhasil dipublikasikan! Anda akan diarahkan kembali...';
                 successMessage.classList.remove('d-none');
+                errorMessage.classList.add('d-none');
                 form.reset();
 
                 setTimeout(() => {
@@ -151,9 +149,12 @@
 
             } catch (error) {
                 console.error('Error:', error);
-                alert('Terjadi kesalahan. Cek konsol untuk detail.');
+                errorMessage.textContent = 'Terjadi kesalahan saat mengirim data. Silakan coba lagi.';
+                errorMessage.classList.remove('d-none');
+                successMessage.classList.add('d-none');
             } finally {
-                // ... (logika enable tombol)
+                submitButton.disabled = false;
+                submitButton.textContent = 'Publikasikan Artikel';
             }
         });
     </script>
