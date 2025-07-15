@@ -1,0 +1,19 @@
+Deskripsi Proyek: Website Desa Blimbing, Kecamatan Mandiraja, Kabupaten Banjarnegara
+Tujuan Proyek
+Proyek ini bertujuan untuk merancang dan membangun sebuah website profil desa yang modern, informatif, dan interaktif untuk Desa Blimbing, Kecamatan Mandiraja, Kabupaten Banjarnegara. Website ini berfungsi sebagai pusat informasi digital bagi warga desa, calon pengunjung, dan pihak-pihak yang berkepentingan. Tujuan utamanya adalah untuk menyajikan profil desa, potensi yang dimiliki, kegiatan terkini, serta mempermudah akses informasi layanan desa secara daring.
+________________________________________
+Teknologi yang Digunakan
+•	HTML5: Sebagai fondasi utama untuk membangun struktur seluruh halaman website.
+•	CSS3: Digunakan untuk melakukan styling dan mendesain tampilan visual website, termasuk tata letak, warna, dan tipografi.
+•	Bootstrap 5: Framework CSS yang dimanfaatkan untuk memastikan desain website responsif, sehingga dapat diakses dengan baik di berbagai perangkat seperti desktop, tablet, dan smartphone.
+•	JavaScript : Digunakan untuk menambahkan fungsionalitas interaktif, seperti efek navbar saat di-scroll, validasi form sederhana, dan memuat komponen header dan footer secara dinamis untuk menjaga konsistensi antarhalaman.
+________________________________________
+Fitur dan Fungsionalitas Utama
+•	Desain Responsif: Tata letak website dapat beradaptasi secara otomatis dengan berbagai ukuran layar.
+•	Struktur Halaman Komprehensif:
+o	Beranda (index.html): Menampilkan ringkasan informasi desa, termasuk hero section dengan teks animasi, profil singkat, visi & misi, struktur pemerintahan, potensi desa, statistik, sejarah, galeri, dan peta lokasi.
+o	Halaman Artikel (artikel.html): Berisi daftar artikel atau berita terbaru dalam format kartu yang menarik.
+o	Halaman Detail Artikel (artikel-detail.html): Sebuah template khusus untuk menampilkan isi lengkap dari sebuah artikel, dilengkapi dengan sidebar untuk artikel terkait.
+o	Halaman Login & Sign Up (Login dan Sign in.html): Menyediakan antarmuka bagi pengguna untuk masuk atau mendaftar, meskipun fungsionalitasnya masih bersifat front-end.
+•	Komponen Dinamis: Navbar dan footer dibuat sebagai komponen terpisah yang dimuat menggunakan JavaScript pada setiap halaman. Hal ini memastikan konsistensi tampilan dan kemudahan dalam pemeliharaan kode.
+•	Interaktivitas Pengguna: Website dilengkapi dengan berbagai elemen interaktif seperti efek hover pada tombol dan kartu, tombol "Kembali ke Atas" (Back to Top), serta navigasi yang mulus (smooth scroll).
